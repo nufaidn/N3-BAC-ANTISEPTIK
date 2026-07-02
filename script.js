@@ -6,6 +6,7 @@
 const navbar = document.getElementById('navbar');
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('navLinks');
+const navBackdrop = document.getElementById('navBackdrop');
 
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
@@ -16,17 +17,26 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 /* ---- Hamburger menu ---- */
+function closeMenu() {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+    if (navBackdrop) navBackdrop.classList.remove('open');
+}
+
 hamburger.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
     hamburger.classList.toggle('open');
-    navLinks.classList.toggle('open');
+    if (navBackdrop) navBackdrop.classList.toggle('open', isOpen);
 });
+
+// Close menu when backdrop is clicked
+if (navBackdrop) {
+    navBackdrop.addEventListener('click', closeMenu);
+}
 
 // Close menu on link click
 navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        navLinks.classList.remove('open');
-    });
+    link.addEventListener('click', closeMenu);
 });
 
 /* ---- Smooth Scroll ---- */
@@ -94,142 +104,183 @@ document.querySelectorAll('.btn-primary, .btn-large, .btn-outline, .btn-white, .
     btn.addEventListener('click', function (e) { addRipple(this, e); });
 });
 
-/* ---- Parallax: hero floating images ---- */
-window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    const floatImages = document.querySelectorAll('.float-img');
-    const threshold = window.innerHeight;
-
-    if (scrolled < threshold && floatImages.length > 0) {
-        floatImages.forEach((img, index) => {
-            const speed = 0.05 + (index * 0.02);
-            img.style.transform += ` translateY(${scrolled * speed}px)`;
-        });
-    }
-}, { passive: true });
+/* ---- Parallax: hero floating images (disabled for new animation) ---- */
+// Parallax effect removed for cleaner product switcher animation
 
 /* ---- Floating images 3D tilt effect ---- */
-document.querySelectorAll('.float-img').forEach(img => {
-    img.addEventListener('mouseenter', function() {
-        this.style.animationPlayState = 'paused';
-    });
-    
-    img.addEventListener('mouseleave', function() {
-        this.style.animationPlayState = 'running';
-        this.style.transform = '';
-    });
-    
-    // Smooth zoom effect on mouse move
-    img.addEventListener('mousemove', function(e) {
-        const rect = this.getBoundingClientRect();
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize first product with floating animation
+    const firstProduct = document.querySelector('.float-img.hero-product');
+    if (firstProduct) {
+        firstProduct.classList.add('active');
+        setTimeout(() => {
+            firstProduct.classList.remove('active');
+            firstProduct.classList.add('floating');
+        }, 800);
+    }
+
+    // 3D tilt effect on hover
+    document.addEventListener('mousemove', (e) => {
+        const heroProduct = document.querySelector('.float-img.hero-product.floating');
+        if (!heroProduct) return;
+
+        const rect = heroProduct.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = (y - centerY) / 10;
-        const rotateY = (x - centerX) / 10;
-        
-        const isSingleLarge = this.classList.contains('single-large');
-        const baseScale = isSingleLarge ? 1.6 : 1.18;
-        const translateY = isSingleLarge ? -32 : -22;
-        
-        this.style.transform = `
-            translateY(${translateY}px) 
-            scale(${baseScale}) 
-            rotateX(${-rotateX}deg) 
-            rotateY(${rotateY}deg)
-        `;
+
+        // Check if mouse is over the product
+        if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((y - centerY) / centerY) * 5;
+            const rotateY = ((x - centerX) / centerX) * 5;
+
+            heroProduct.style.setProperty('--tilt-x', `${-rotateX}deg`);
+            heroProduct.style.setProperty('--tilt-y', `${rotateY}deg`);
+        }
     });
 });
 
-/* ---- Size pill toggle (visual only) ---- */
+/* ---- Size pill toggle with smooth product switcher ---- */
+const productData = {
+    '60': {
+        image: 'img/product-60ml.png',
+        name: '60 ML',
+        desc: 'Ukuran travel & emergency'
+    },
+    '100': {
+        image: 'img/product-100ml.png',
+        name: '100 ML',
+        desc: 'Ukuran praktis untuk keluarga'
+    },
+    '300': {
+        image: 'img/product-300ml.png',
+        name: '300 ML',
+        desc: 'Ukuran ekonomis & hemat'
+    }
+};
+
+let currentSize = '100';
+let isAnimating = false;
+
 document.querySelectorAll('.size-pills').forEach(group => {
     group.querySelectorAll('.size-pill').forEach(pill => {
         pill.addEventListener('click', () => {
             const selectedSize = pill.getAttribute('data-size');
-            const currentActive = group.querySelector('.size-pill--active');
-            const currentSize = currentActive ? currentActive.getAttribute('data-size') : null;
-            
+
+            if (!selectedSize || selectedSize === currentSize || isAnimating) {
+                return;
+            }
+
             // Update active pill
             group.querySelectorAll('.size-pill').forEach(p => p.classList.remove('size-pill--active'));
             pill.classList.add('size-pill--active');
-            
-            // Change hero images if this is hero section
+
+            // Update currentSize dulu supaya perubahan berikutnya tidak ikut ter-block
+            // (mis. kondisi parsing > isAnimating tidak selaras di beberapa device touch)
+            const oldSize = currentSize;
+            currentSize = selectedSize;
+
+            // Change hero product if in hero section
             const heroImages = document.getElementById('heroImages');
-            if (heroImages && selectedSize && currentSize !== selectedSize) {
-                changeHeroImages(selectedSize, parseInt(currentSize) < parseInt(selectedSize));
+            const mobileHeroImg = document.getElementById('mobileHeroImg');
+            if (heroImages) {
+                changeHeroProduct(selectedSize, parseInt(selectedSize) > parseInt(oldSize));
             }
+
+            // Update mobile-only image (middle, between size pills and CTA)
+            if (mobileHeroImg && productData[selectedSize]) {
+                mobileHeroImg.classList.remove('mobile-enter');
+                mobileHeroImg.classList.add('mobile-exit');
+
+                setTimeout(() => {
+                    mobileHeroImg.src = productData[selectedSize].image;
+                    mobileHeroImg.alt = `N3 BAC ${productData[selectedSize].name}`;
+                    mobileHeroImg.classList.remove('mobile-exit');
+                    mobileHeroImg.classList.add('mobile-enter');
+                }, 500);
+            }
+
         });
     });
 });
 
-/* ---- Hero image switcher with swipe animation ---- */
-function changeHeroImages(size, isNext = true) {
-    const heroImages = document.getElementById('heroImages');
-    if (!heroImages) return;
-    
-    const images = heroImages.querySelectorAll('.float-img');
-    const swipeOutClass = isNext ? 'swipe-out-left' : 'swipe-out-right';
-    const swipeInClass = isNext ? 'swipe-in-right' : 'swipe-in-left';
-    
-    // Image sources based on size
-    const imageSources = {
-        '60': [
-            'img/product-60ml.png'
-        ],
-        '100': [
-            'img/product1.png',
-            'img/product-100ml.png',
-            'img/product2.png'
-        ],
-        '300': [
-            'img/product-300ml.png'
-        ]
-    };
-    
-    // Animate out
-    images.forEach(img => {
-        img.classList.add(swipeOutClass);
-    });
-    
-    // Wait for animation, then swap images and animate in
-    setTimeout(() => {
-        const sources = imageSources[size];
-        
-        if (size === '300' || size === '60') {
-            // For 300ml and 60ml: show only 1 large image
-            images.forEach((img, index) => {
-                if (index === 0) {
-                    img.src = sources[0];
-                    img.setAttribute('data-size', size);
-                    img.classList.remove(swipeOutClass);
-                    img.classList.add(swipeInClass, 'single-large');
-                    img.style.display = 'block';
-                } else {
-                    img.style.display = 'none';
-                    img.classList.remove(swipeOutClass);
-                }
-            });
-        } else {
-            // For 100ml: show all 3 images
-            images.forEach((img, index) => {
-                img.style.display = 'block';
-                img.src = sources[index];
-                img.setAttribute('data-size', size);
-                img.classList.remove(swipeOutClass, 'single-large');
-                img.classList.add(swipeInClass);
-            });
-        }
-        
-        // Remove animation classes after animation completes
+/* ---- Hero product switcher with smooth zoom animation ---- */
+function changeHeroProduct(newSize, isNext = true) {
+    const container = document.getElementById('heroImages');
+    const infoContainer = document.getElementById('productInfo');
+
+    if (!container || isAnimating) return;
+
+    isAnimating = true;
+    const currentImg = container.querySelector('.float-img.hero-product.floating');
+    const data = productData[newSize];
+
+    if (!currentImg || !data) {
+        isAnimating = false;
+        return;
+    }
+
+    // Stop floating animation and start exit animation
+    currentImg.classList.remove('floating');
+    currentImg.classList.add('exit');
+
+    // Update info badge with smooth fade
+    if (infoContainer) {
+        infoContainer.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+        infoContainer.style.opacity = '0';
+        infoContainer.style.transform = 'translateY(15px) scale(0.95)';
+
         setTimeout(() => {
-            images.forEach(img => {
-                img.classList.remove(swipeInClass);
-            });
-        }, 500);
-    }, 500);
+            infoContainer.querySelector('.info-badge').textContent = data.name;
+            infoContainer.querySelector('.info-desc').textContent = data.desc;
+            infoContainer.style.opacity = '1';
+            infoContainer.style.transform = 'translateY(0) scale(1)';
+        }, 320);
+    }
+
+    // Create new image element
+    const newImg = document.createElement('img');
+    newImg.src = data.image;
+    newImg.alt = `N3 BAC ${data.name}`;
+    newImg.className = 'float-img hero-product';
+    newImg.setAttribute('data-size', newSize);
+
+    // Add to container (hidden initially)
+    container.appendChild(newImg);
+
+    // Remove old image after swipe out animation completes
+    setTimeout(() => {
+        if (currentImg && currentImg.parentNode) {
+            currentImg.remove();
+        }
+    }, 750);
+
+    // Start swipe in animation immediately
+    requestAnimationFrame(() => {
+        newImg.classList.add('active');
+
+        // Fallback: always reset after max animation duration
+        const fallbackTimer = setTimeout(() => {
+            newImg.classList.remove('active');
+            newImg.classList.add('floating');
+            isAnimating = false;
+        }, 1000);
+
+        // Prefer animationend event (fires earlier if animation completes)
+        const handleAnimationEnd = () => {
+            clearTimeout(fallbackTimer);
+            newImg.removeEventListener('animationend', handleAnimationEnd);
+            newImg.removeEventListener('webkitAnimationEnd', handleAnimationEnd);
+            newImg.classList.remove('active');
+            newImg.classList.add('floating');
+            isAnimating = false;
+        };
+
+        newImg.addEventListener('animationend', handleAnimationEnd, { once: true });
+        newImg.addEventListener('webkitAnimationEnd', handleAnimationEnd, { once: true });
+    });
 }
 
 /* ---- Feature card active hover (for touch devices) ---- */

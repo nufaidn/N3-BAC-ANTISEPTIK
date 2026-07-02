@@ -35,6 +35,9 @@
         </div>
     </header>
 
+    <!-- Navbar backdrop (mobile drawer overlay) -->
+    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
     <!-- Hero -->
     <section class="hero" id="home">
         <div class="hero-bg">
@@ -56,6 +59,12 @@
                     <span class="size-pill size-pill--active" data-size="100">100 ML</span>
                     <span class="size-pill" data-size="300">300 ML</span>
                 </div>
+                <!-- Mobile-only hero image (tengah, di antara size pills dan CTA) -->
+                <div class="mobile-hero-image" aria-hidden="true">
+                    <div class="mobile-hero-image-inner" id="mobileHeroImage">
+                        <img src="img/product-100ml.png" alt="N3 BAC 100ml" id="mobileHeroImg" />
+                    </div>
+                </div>
                 <div class="hero-actions">
                     <a href="#kontak" class="btn-primary">Dapatkan Sekarang</a>
                     <a href="#keunggulan" class="btn-ghost">Pelajari Lebih →</a>
@@ -64,9 +73,11 @@
             <div class="hero-image" data-aos="fade-left">
                 <div class="hero-glow"></div>
                 <div class="floating-images" id="heroImages">
-                    <img src="img/product1.png" alt="N3 BAC 100ml Product 1" class="float-img float-img-1" data-size="100">
-                    <img src="img/product-100ml.png" alt="N3 BAC 100ml Product 2" class="float-img float-img-2" data-size="100">
-                    <img src="img/product2.png" alt="N3 BAC 100ml Product 3" class="float-img float-img-3" data-size="100">
+                    <img src="img/product-100ml.png" alt="N3 BAC 100ml" class="float-img hero-product" data-size="100">
+                </div>
+                <div class="product-info" id="productInfo">
+                    <div class="info-badge">100 ML</div>
+                    <p class="info-desc">Ukuran praktis untuk keluarga</p>
                 </div>
             </div>
         </div>
@@ -84,7 +95,8 @@
                     <div class="challenge-icon"><i data-lucide="skull"></i></div>
 
                     <h3>Risiko Infeksi Luka Kronis Tinggi</h3>
-                    <p>Luka yang tidak sembuh dalam waktu lama lebih mudah terinfeksi karena terbuka dan terpapar bakteri
+                    <p>Luka yang tidak sembuh dalam waktu lama lebih mudah terinfeksi karena terbuka dan terpapar
+                        bakteri
                         secara terus-menerus.</p>
                 </article>
                 <article class="challenge-card" data-aos="fade-up" data-delay="100">
@@ -118,10 +130,14 @@
                     <p class="section-tag">Solusi N3 BAC</p>
                     <h2 class="section-title">Antiseptik<br><span class="text-cyan">Generasi Baru</span></h2>
                     <ul class="check-list">
-                        <li><span class="check"><i data-lucide="check"></i></span> Efektif membunuh bakteri gram positif & negatif</li>
-                        <li><span class="check"><i data-lucide="check"></i></span> Tidak menyebabkan iritasi atau rasa perih</li>
-                        <li><span class="check"><i data-lucide="check"></i></span> Cocok untuk semua jenis luka: akut & kronis</li>
-                        <li><span class="check"><i data-lucide="check"></i></span> Stabil dan aman digunakan jangka panjang</li>
+                        <li><span class="check"><i data-lucide="check"></i></span> Efektif membunuh bakteri gram positif
+                            & negatif</li>
+                        <li><span class="check"><i data-lucide="check"></i></span> Tidak menyebabkan iritasi atau rasa
+                            perih</li>
+                        <li><span class="check"><i data-lucide="check"></i></span> Cocok untuk semua jenis luka: akut &
+                            kronis</li>
+                        <li><span class="check"><i data-lucide="check"></i></span> Stabil dan aman digunakan jangka
+                            panjang</li>
                     </ul>
                 </div>
                 <div class="generation-visual" data-aos="fade-left">
@@ -187,13 +203,15 @@
                     </div>
                 </div>
                 <div class="wound-card" data-aos="fade-up" data-delay="80">
-                    <img src="img/jenisluka/image10.png" alt="Luka Dekubitus" onerror="this.src='pptx_media/image13.jpeg'">
+                    <img src="img/jenisluka/image10.png" alt="Luka Dekubitus"
+                        onerror="this.src='pptx_media/image13.jpeg'">
                     <div class="wound-card-body">
                         <h3>Luka Dekubitus</h3>
                     </div>
                 </div>
                 <div class="wound-card" data-aos="fade-up" data-delay="160">
-                    <img src="img/jenisluka/image11.jpeg" alt="Pasca Operasi" onerror="this.src='pptx_media/image14.jpeg'">
+                    <img src="img/jenisluka/image11.jpeg" alt="Pasca Operasi"
+                        onerror="this.src='pptx_media/image14.jpeg'">
                     <div class="wound-card-body">
                         <h3>Pasca Operasi</h3>
                     </div>
@@ -205,7 +223,8 @@
                     </div>
                 </div>
                 <div class="wound-card" data-aos="fade-up" data-delay="320">
-                    <img src="img/jenisluka/image13.jpeg" alt="Infeksi Ringan" onerror="this.src='pptx_media/image15.jpeg'">
+                    <img src="img/jenisluka/image13.jpeg" alt="Infeksi Ringan"
+                        onerror="this.src='pptx_media/image15.jpeg'">
                     <div class="wound-card-body">
                         <h3>Infeksi Ringan</h3>
                     </div>
@@ -307,10 +326,10 @@
                 <div class="contact-info">
                     <p class="section-tag light">Hubungi Kami</p>
                     <h2>Dapatkan N3 BAC<br>Untuk Keluarga Anda</h2>
-                    <div class="size-pills size-pills--light">
-                        <span class="size-pill">60 ML</span>
-                        <span class="size-pill size-pill--active">100 ML</span>
-                        <span class="size-pill">300 ML</span>
+                    <div class="size-badges">
+                        <span class="size-badge">60 ML</span>
+                        <span class="size-badge">100 ML</span>
+                        <span class="size-badge">300 ML</span>
                     </div>
                     <ul class="contact-list">
                         <li>
@@ -334,16 +353,19 @@
                     </ul>
                 </div>
                 <div class="contact-cta">
-                    <img src="img/product-hero.png" alt="N3 BAC" class="contact-product">
+                    <img src="img/semua-product.png" alt="N3 BAC - Semua Ukuran" class="contact-product">
                     <div class="cta-buttons">
                         <a href="https://wa.me/6282324764733" class="btn-primary btn-large" target="_blank"
                             rel="noopener"><i data-lucide="message-circle"></i> Hubungi via WhatsApp</a>
                         <div class="marketplace-row">
                             <span>Tersedia di:</span>
                             <div class="marketplace-links">
-                                <a href="#" class="marketplace-link">Shopee</a>
-                                <a href="#" class="marketplace-link">Tokopedia</a>
-                                <a href="#" class="marketplace-link">TikTok Shop</a>
+                                <a href="https://shopee.co.id/Pembersih-Luka-Antiseptik-N3-BAC-ENTRI-i.25320656.51059982902?extraParams=%7B%22display_model_id%22%3A445881310109%2C%22model_selection_logic%22%3A2%7D&sp_atk=fbb1fdab-16a6-40b0-83dd-7a19c841e1d8&xptdk=fbb1fdab-16a6-40b0-83dd-7a19c841e1d8"
+                                    class="marketplace-link" target="_blank" rel="noopener">Shopee</a>
+                                <a href="https://vt.tokopedia.com/t/ZS96tu4dADshb-PYTwJ/" class="marketplace-link"
+                                    target="_blank" rel="noopener">Tokopedia</a>
+                                <a href="https://vt.tokopedia.com/t/ZS96tu4dADshb-PYTwJ/" class="marketplace-link"
+                                    target="_blank" rel="noopener">TikTok Shop</a>
                             </div>
                         </div>
                     </div>
@@ -358,19 +380,77 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <img src="img/logo.png" alt="N3 ENTRI" class="footer-logo-img">
-                    <p>N3 BAC — Antiseptik Pembersih Luka<br>Solusi Modern Perawatan Luka</p>
+                    <p class="footer-desc">N3 BAC — Antiseptik Pembersih Luka<br>Solusi Modern untuk Perawatan Luka</p>
+                    <div class="footer-badges">
+                        <span class="footer-badge"><i data-lucide="shield-check"></i> Steril & Aman</span>
+                        <span class="footer-badge"><i data-lucide="sparkles"></i> PHMB 0,1%</span>
+                    </div>
                 </div>
-                <div class="footer-links">
-                    <a href="#tantangan">Tantangan</a>
-                    <a href="#keunggulan">Keunggulan</a>
-                    <a href="#jenis-luka">Jenis Luka</a>
-                    <a href="#perbandingan">Perbandingan</a>
-                    <a href="#kontak">Kontak</a>
+
+                <div class="footer-nav">
+                    <h4>Navigasi</h4>
+                    <div class="footer-links">
+                        <a href="#tantangan"><i data-lucide="chevron-right"></i> Tantangan</a>
+                        <a href="#keunggulan"><i data-lucide="chevron-right"></i> Keunggulan</a>
+                        <a href="#jenis-luka"><i data-lucide="chevron-right"></i> Jenis Luka</a>
+                        <a href="#perbandingan"><i data-lucide="chevron-right"></i> Perbandingan</a>
+                        <a href="#kontak"><i data-lucide="chevron-right"></i> Kontak</a>
+                    </div>
                 </div>
-                <div class="footer-info">
-                    <p>&copy; 2026 PT Entri Jaya Makmur. All rights reserved.</p>
-                    <p class="footer-tagline">Produk berkualitas, keluarga terlindungi.</p>
+
+                <div class="footer-contact">
+                    <h4>Hubungi Kami</h4>
+                    <div class="footer-contact-list">
+                        <a href="https://wa.me/6282324764733" target="_blank" rel="noopener">
+                            <i data-lucide="phone"></i>
+                            <span>+62 823-2476-4733</span>
+                        </a>
+                        <a href="mailto:marketing@entrijayamakmur.com">
+                            <i data-lucide="mail"></i>
+                            <span>marketing@entrijayamakmur.com</span>
+                        </a>
+                        <a href="https://entrijayamakmur.co.id" target="_blank" rel="noopener">
+                            <i data-lucide="globe"></i>
+                            <span>entrijayamakmur.co.id</span>
+                        </a>
+                        <a href="https://instagram.com/pt.entrijayamakmur" target="_blank" rel="noopener">
+                            <i data-lucide="instagram"></i>
+                            <span>@pt.entrijayamakmur</span>
+                        </a>
+                    </div>
                 </div>
+
+                <div class="footer-products">
+                    <h4>Varian Produk</h4>
+                    <div class="footer-product-list">
+                        <div class="footer-product-item">
+                            <i data-lucide="package"></i>
+                            <div>
+                                <strong>N3 BAC 60 ML</strong>
+                                <span>Travel & Emergency</span>
+                            </div>
+                        </div>
+                        <div class="footer-product-item">
+                            <i data-lucide="package"></i>
+                            <div>
+                                <strong>N3 BAC 100 ML</strong>
+                                <span>Keluarga Praktis</span>
+                            </div>
+                        </div>
+                        <div class="footer-product-item">
+                            <i data-lucide="package"></i>
+                            <div>
+                                <strong>N3 BAC 300 ML</strong>
+                                <span>Ekonomis & Hemat</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2026 PT Entri Jaya Makmur. All rights reserved.</p>
+                <p class="footer-tagline"><i data-lucide="heart"></i> Produk berkualitas, keluarga terlindungi.</p>
             </div>
         </div>
     </footer>
