@@ -177,9 +177,7 @@ function changeHeroImages(size, isNext = true) {
     // Image sources based on size
     const imageSources = {
         '60': [
-            'pptx_media/image3.png',
-            'pptx_media/image4.png',
-            'pptx_media/image5.png'
+            'img/product-60ml.png'
         ],
         '100': [
             'img/product1.png',
@@ -200,8 +198,8 @@ function changeHeroImages(size, isNext = true) {
     setTimeout(() => {
         const sources = imageSources[size];
         
-        if (size === '300') {
-            // For 300ml: show only 1 large image
+        if (size === '300' || size === '60') {
+            // For 300ml and 60ml: show only 1 large image
             images.forEach((img, index) => {
                 if (index === 0) {
                     img.src = sources[0];
@@ -215,7 +213,7 @@ function changeHeroImages(size, isNext = true) {
                 }
             });
         } else {
-            // For other sizes: show all 3 images
+            // For 100ml: show all 3 images
             images.forEach((img, index) => {
                 img.style.display = 'block';
                 img.src = sources[index];
