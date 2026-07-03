@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+  <!-- Rounded square background -->
+  <rect x="2" y="2" width="20" height="20" rx="4" />
+  <!-- Simple bag shape -->
+  <path fill="#fff" d="M16 8h-1V6a3 3 0 0 0-6 0v2H8v8h8V8zm-5-2a1 1 0 0 1 2 0v2h-2V6z" />
+</svg>
