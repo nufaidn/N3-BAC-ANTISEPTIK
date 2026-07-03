@@ -1,6 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-  <!-- Rounded square background -->
-  <rect x="2" y="2" width="20" height="20" rx="4" />
-  <!-- Simple bag shape -->
-  <path fill="#fff" d="M16 8h-1V6a3 3 0 0 0-6 0v2H8v8h8V8zm-5-2a1 1 0 0 1 2 0v2h-2V6z" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" fill="white">
+  <path d="M500 0C223.9 0 0 223.9 0 500s223.9 500 500 500 500-223.9 500-500S776.1 0 500 0zm0 120c209.4 0 380 170.6 380 380S709.4 880 500 880 120 709.4 120 500 290.6 120 500 120zm-30 180v40h-90v80h90v280h80V420h90v-80h-90v-40h-80zm160 40c-55.2 0-100 44.8-100 100s44.8 100 100 100 100-44.8 100-100-44.8-100-100-100zm0 60c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40z"/>
 </svg>

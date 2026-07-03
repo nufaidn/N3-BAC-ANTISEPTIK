@@ -276,91 +276,124 @@
     </section>
 
     <!-- Testimoni -->
-    <section class="testimonials" id="testimoni" style="padding: 100px 0; background: var(--cyan-pale);">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <p class="section-tag">Testimoni</p>
-                <h2 class="section-title">Apa Kata Konsumen Kami?</h2>
-            </div>
-            <div class="testi-grid"
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
-                <div class="testi-card" data-aos="fade-up" data-delay="0"
-                    style="background: var(--white); padding: 32px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid rgba(5, 99, 193, 0.08);">
-                    <div style="color: #F59E0B; margin-bottom: 16px; display: flex; gap: 4px;">
-                        <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
-                        <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
-                        <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
-                        <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
-                        <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
+    <section class="testimonials" id="testimoni">
+        <div class="testi-section-header" data-aos="fade-up">
+            <p class="section-tag">Testimoni</p>
+            <h2 class="section-title">Apa Kata Konsumen Kami?</h2>
+        </div>
+        <div class="testi-carousel-wrapper" id="testiCarouselWrapper">
+            <div class="testi-track" id="testiTrack">
+                <!-- Card 1 -->
+                <div class="testi-card">
+                    <div class="testi-stars">
+                        <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i
+                            data-lucide="star"></i><i data-lucide="star"></i>
                     </div>
-                    <p
-                        style="font-size: 15px; color: var(--muted); line-height: 1.6; margin-bottom: 24px; font-style: italic;">
-                        "Luka pasca operasi caesar saya cepat sekali keringnya pakai N3 BAC ini. Paling suka karena sama
-                        sekali nggak perih pas disemprot."
-                    </p>
-                    <div style="display: flex; align-items: center; gap: 16px;">
-                        <div
-                            style="width: 48px; height: 48px; border-radius: 50%; background: var(--gradient-blue); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px;">
-                            S
-                        </div>
+                    <p class="testi-quote">"Luka pasca operasi caesar saya cepat sekali keringnya pakai N3 BAC ini.
+                        Paling suka karena sama sekali nggak perih pas disemprot."</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar" style="background: linear-gradient(135deg,#0563C1,#00B4D8);">S</div>
                         <div>
-                            <h4 style="font-size: 16px; font-weight: 700; color: var(--dark); margin: 0;">Siti Rahmawati
-                            </h4>
-                            <span style="font-size: 13px; color: var(--mid);">Ibu Rumah Tangga</span>
+                            <h4>Siti Rahmawati</h4>
+                            <span>Ibu Rumah Tangga, Bandung</span>
                         </div>
                     </div>
                 </div>
-
-                <div class="testi-card" data-aos="fade-up" data-delay="100"
-                    style="background: var(--white); padding: 32px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid rgba(5, 99, 193, 0.08);">
-                    <div style="color: #F59E0B; margin-bottom: 16px; display: flex; gap: 4px;">
-                        <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
-                        <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
-                        <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
-                        <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
-                        <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
+                <!-- Card 2 -->
+                <div class="testi-card">
+                    <div class="testi-stars">
+                        <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i
+                            data-lucide="star"></i><i data-lucide="star"></i>
                     </div>
-                    <p
-                        style="font-size: 15px; color: var(--muted); line-height: 1.6; margin-bottom: 24px; font-style: italic;">
-                        "Pasien diabetes saya lukanya sulit sembuh sebelumnya. Semenjak perawatan lukanya pakai
-                        antiseptik ini, progresnya sangat luar biasa dan infeksi terkontrol baik."
-                    </p>
-                    <div style="display: flex; align-items: center; gap: 16px;">
-                        <div
-                            style="width: 48px; height: 48px; border-radius: 50%; background: var(--gradient-blue); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px;">
-                            B
-                        </div>
+                    <p class="testi-quote">"Pasien diabetes saya lukanya sulit sembuh sebelumnya. Semenjak perawatan
+                        lukanya pakai antiseptik ini, progresnya sangat luar biasa dan infeksi terkontrol baik."</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar" style="background: linear-gradient(135deg,#034A94,#0563C1);">B</div>
                         <div>
-                            <h4 style="font-size: 16px; font-weight: 700; color: var(--dark); margin: 0;">Budi Santoso
-                            </h4>
-                            <span style="font-size: 13px; color: var(--mid);">Perawat Luka Homecare</span>
+                            <h4>Budi Santoso</h4>
+                            <span>Perawat Luka Homecare, Jakarta</span>
                         </div>
                     </div>
                 </div>
-
-                <div class="testi-card" data-aos="fade-up" data-delay="200"
-                    style="background: var(--white); padding: 32px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid rgba(5, 99, 193, 0.08);">
-                    <div style="color: #F59E0B; margin-bottom: 16px; display: flex; gap: 4px;">
-                        <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
-                        <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
-                        <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
-                        <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
-                        <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
+                <!-- Card 3 -->
+                <div class="testi-card">
+                    <div class="testi-stars">
+                        <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i
+                            data-lucide="star"></i><i data-lucide="star"></i>
                     </div>
-                    <p
-                        style="font-size: 15px; color: var(--muted); line-height: 1.6; margin-bottom: 24px; font-style: italic;">
-                        "Keponakan saya kemarin jatuh dari sepeda lumayan parah. Semprot pakai ini malah anteng nggak
-                        nangis sama sekali. P3K wajib ada di rumah pokoknya!"
-                    </p>
-                    <div style="display: flex; align-items: center; gap: 16px;">
-                        <div
-                            style="width: 48px; height: 48px; border-radius: 50%; background: var(--gradient-blue); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px;">
-                            A
-                        </div>
+                    <p class="testi-quote">"Keponakan saya kemarin jatuh dari sepeda lumayan parah. Semprot pakai ini
+                        malah anteng nggak nangis sama sekali. P3K wajib ada di rumah pokoknya!"</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar" style="background: linear-gradient(135deg,#F05A28,#FF7A45);">A</div>
                         <div>
-                            <h4 style="font-size: 16px; font-weight: 700; color: var(--dark); margin: 0;">Agung Pratama
-                            </h4>
-                            <span style="font-size: 13px; color: var(--mid);">Karyawan Swasta</span>
+                            <h4>Agung Pratama</h4>
+                            <span>Karyawan Swasta, Surabaya</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="testi-card">
+                    <div class="testi-stars">
+                        <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i
+                            data-lucide="star"></i><i data-lucide="star"></i>
+                    </div>
+                    <p class="testi-quote">"Suami saya punya luka dekubitus karena bed rest lama. N3 BAC ini benar-benar
+                        membantu menjaga kebersihan luka dan mencegah infeksi lebih parah. Dokternya pun
+                        merekomendasikan!"</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar" style="background: linear-gradient(135deg,#00B4D8,#48CAE4);">D</div>
+                        <div>
+                            <h4>Dewi Kusumawati</h4>
+                            <span>Ibu Rumah Tangga, Yogyakarta</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 5 -->
+                <div class="testi-card">
+                    <div class="testi-stars">
+                        <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i
+                            data-lucide="star"></i><i data-lucide="star"></i>
+                    </div>
+                    <p class="testi-quote">"Sebagai tenaga medis, saya sangat terkesan dengan N3 BAC. Formula PHMB-nya
+                        aman bahkan untuk pasien dengan kulit sensitif. Tidak ada reaksi iritasi sama sekali dari
+                        seluruh pasien kami."</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar" style="background: linear-gradient(135deg,#0563C1,#034A94);">R</div>
+                        <div>
+                            <h4>dr. Rizal Fauzi</h4>
+                            <span>Dokter Umum, Semarang</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 6 -->
+                <div class="testi-card">
+                    <div class="testi-stars">
+                        <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i
+                            data-lucide="star"></i><i data-lucide="star"></i>
+                    </div>
+                    <p class="testi-quote">"Saya punya riwayat kulit sensitif, pakai antiseptik biasa langsung perih dan
+                        merah. Pakai N3 BAC ini beda banget, adem, nggak ada rasa terbakar. Akhirnya nemu yang pas!"</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar" style="background: linear-gradient(135deg,#FF7A45,#F05A28);">N</div>
+                        <div>
+                            <h4>Nurul Hidayah</h4>
+                            <span>Mahasiswi, Malang</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 7 -->
+                <div class="testi-card">
+                    <div class="testi-stars">
+                        <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i
+                            data-lucide="star"></i><i data-lucide="star"></i>
+                    </div>
+                    <p class="testi-quote">"Usaha konveksi saya sering ada kejadian luka kecil-kecil akibat mesin jahit.
+                        Sekarang selalu sedia N3 BAC di kotak P3K. Luka cepat kering dan tidak pernah infeksi lagi."</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar" style="background: linear-gradient(135deg,#034A94,#00B4D8);">H</div>
+                        <div>
+                            <h4>Hendra Wijaya</h4>
+                            <span>Pengusaha Konveksi, Bandung</span>
                         </div>
                     </div>
                 </div>
@@ -377,31 +410,52 @@
                     <h2>Dapatkan N3 BAC<br>Untuk Keluarga Anda</h2>
                     <ul class="contact-list">
                         <li>
-                            <span class="contact-label">WhatsApp</span>
-                            <a href="https://wa.me/6282324764733" target="_blank" rel="noopener">
-                                <img src="https://cdn.simpleicons.org/whatsapp/white" alt="WA" height="18"
-                                    style="vertical-align: middle; margin-right:8px;">+62 823-2476-4733
+                            <a href="https://wa.me/6282324764733" target="_blank" rel="noopener"
+                                class="contact-list-item">
+                                <span class="contact-icon-wrap">
+                                    <img src="https://cdn.simpleicons.org/whatsapp/white" alt="WhatsApp" width="18"
+                                        height="18">
+                                </span>
+                                <span class="contact-text">
+                                    <span class="contact-label">WhatsApp</span>
+                                    +62 823-2476-4733
+                                </span>
                             </a>
                         </li>
                         <li>
-                            <span class="contact-label">Email</span>
-                            <a href="mailto:marketing@entrijayamakmur.com">
-                                <i data-lucide="mail"
-                                    style="display:inline-block; vertical-align:middle; width:20px; height:20px; margin-right:8px;"></i>marketing@entrijayamakmur.com
+                            <a href="mailto:marketing@entrijayamakmur.com" class="contact-list-item">
+                                <span class="contact-icon-wrap">
+                                    <i data-lucide="mail"></i>
+                                </span>
+                                <span class="contact-text">
+                                    <span class="contact-label">Email</span>
+                                    marketing@entrijayamakmur.com
+                                </span>
                             </a>
                         </li>
                         <li>
-                            <span class="contact-label">Website</span>
-                            <a href="https://entrijayamakmur.co.id" target="_blank" rel="noopener">
-                                <i data-lucide="globe"
-                                    style="display:inline-block; vertical-align:middle; width:20px; height:20px; margin-right:8px;"></i>entrijayamakmur.co.id
+                            <a href="https://entrijayamakmur.co.id" target="_blank" rel="noopener"
+                                class="contact-list-item">
+                                <span class="contact-icon-wrap">
+                                    <i data-lucide="globe"></i>
+                                </span>
+                                <span class="contact-text">
+                                    <span class="contact-label">Website</span>
+                                    entrijayamakmur.co.id
+                                </span>
                             </a>
                         </li>
                         <li>
-                            <span class="contact-label">Instagram</span>
-                            <a href="https://instagram.com/pt.entrijayamakmur" target="_blank" rel="noopener">
-                                <img src="https://cdn.simpleicons.org/instagram/white" alt="IG" height="18"
-                                    style="vertical-align: middle; margin-right:8px;">@pt.entrijayamakmur
+                            <a href="https://instagram.com/pt.entrijayamakmur" target="_blank" rel="noopener"
+                                class="contact-list-item">
+                                <span class="contact-icon-wrap">
+                                    <img src="https://cdn.simpleicons.org/instagram/white" alt="Instagram" width="18"
+                                        height="18">
+                                </span>
+                                <span class="contact-text">
+                                    <span class="contact-label">Instagram</span>
+                                    @pt.entrijayamakmur
+                                </span>
                             </a>
                         </li>
                     </ul>
@@ -415,19 +469,29 @@
                         <div class="marketplace-row">
                             <span>Tersedia di:</span>
                             <div class="marketplace-links">
-                                <a href="https://shopee.co.id/" class="marketplace-link" target="_blank" rel="noopener">
-                                    <img src="https://cdn.simpleicons.org/shopee/white" alt="Shopee" height="18"
-                                        style="vertical-align: middle; margin-right: 6px;"> Shopee
+                                <a href="https://shopee.co.id/Pembersih-Luka-Antiseptik-N3-BAC-ENTRI-i.25320656.51059982902?extraParams=%7B%22display_model_id%22%3A445881310109%2C%22model_selection_logic%22%3A2%7D&sp_atk=fbb1fdab-16a6-40b0-83dd-7a19c841e1d8&xptdk=fbb1fdab-16a6-40b0-83dd-7a19c841e1d8"
+                                    class="marketplace-link" target="_blank" rel="noopener">
+                                    <span class="mkt-icon">
+                                        <img src="https://cdn.simpleicons.org/shopee/white" alt="Shopee" width="18"
+                                            height="18">
+                                    </span>
+                                    <span>Shopee</span>
                                 </a>
-                                <a href="https://tokopedia.com/" class="marketplace-link" target="_blank"
-                                    rel="noopener">
-                                    <img src="img/tokopedia.svg" alt="Tokopedia" height="18"
-                                        style="vertical-align: middle; margin-right: 6px; filter: brightness(0) invert(1);">
-                                    Tokopedia
+                                <a href="https://vt.tokopedia.com/t/ZS96tu4dADshb-PYTwJ/" class="marketplace-link"
+                                    target="_blank" rel="noopener">
+                                    <span class="mkt-icon">
+                                        <img src="img/logo-tokopedia.png" alt="Tokopedia"
+                                            style="width: 48px; height: 48px; max-width: none !important;">
+                                    </span>
+                                    <span>Tokopedia</span>
                                 </a>
-                                <a href="https://tiktok.com/" class="marketplace-link" target="_blank" rel="noopener">
-                                    <img src="https://cdn.simpleicons.org/tiktok/white" alt="TikTok Shop" height="18"
-                                        style="vertical-align: middle; margin-right: 6px;"> TikTok
+                                <a href="https://vt.tokopedia.com/t/ZS96tu4dADshb-PYTwJ/" class="marketplace-link"
+                                    target="_blank" rel="noopener">
+                                    <span class="mkt-icon">
+                                        <img src="https://cdn.simpleicons.org/tiktok/white" alt="TikTok" width="18"
+                                            height="18">
+                                    </span>
+                                    <span>TikTok</span>
                                 </a>
                             </div>
                         </div>
@@ -489,24 +553,24 @@
                         <div class="footer-product-item">
                             <i data-lucide="package"></i>
                             <div>
-                                <strong>N3 BAC 60 ML</strong>
-                                <span>Travel & Emergency</span>
+                                <strong>N3 BAC 100 ML</strong>
+                                <span>Keluarga Praktis</span>
                             </div>
                         </div>
-                        <div class="footer-product-item">
+                        <!-- <div class="footer-product-item">
                             <i data-lucide="package"></i>
                             <div>
                                 <strong>N3 BAC 100 ML</strong>
                                 <span>Keluarga Praktis</span>
                             </div>
-                        </div>
-                        <div class="footer-product-item">
+                        </div> -->
+                        <!-- <div class="footer-product-item">
                             <i data-lucide="package"></i>
                             <div>
                                 <strong>N3 BAC 300 ML</strong>
                                 <span>Ekonomis & Hemat</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -518,11 +582,11 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <script>
         lucide.createIcons();
     </script>
+    <script src="script.js"></script>
 </body>
 
 </html>

@@ -104,7 +104,7 @@ a {
 .section-title {
     font-size: clamp(28px, 4vw, 42px);
     font-weight: 800;
-    line-height: 1.2;
+    line-height: 1.3;
     color: var(--dark);
     letter-spacing: -.02em;
 }
@@ -839,14 +839,32 @@ a {
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-md);
-    transition: var(--transition);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
     flex: 0 0 auto;
     width: 200px;
+    position: relative;
+    cursor: pointer;
+}
+
+.wound-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 180, 216, 0) 40%, rgba(5, 99, 193, 0.65) 100%);
+    border-radius: var(--radius-lg);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .wound-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-12px) scale(1.04);
+    box-shadow: 0 20px 48px rgba(5, 99, 193, 0.25), 0 0 0 2px rgba(0, 180, 216, 0.4);
+}
+
+.wound-card:hover::after {
+    opacity: 1;
 }
 
 .wound-card img {
@@ -854,12 +872,24 @@ a {
     height: 180px;
     object-fit: cover;
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    transition: transform 0.45s ease;
+}
+
+.wound-card:hover img {
+    transform: scale(1.1);
 }
 
 .wound-card-body {
     padding: 20px 16px;
     text-align: center;
     background: var(--white);
+    transition: background 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.wound-card:hover .wound-card-body {
+    background: linear-gradient(135deg, #EBF5FF 0%, #E0F5FA 100%);
 }
 
 .wound-card-body--icon {
@@ -884,6 +914,11 @@ a {
     font-weight: 700;
     color: var(--dark);
     line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+.wound-card:hover h3 {
+    color: var(--blue);
 }
 
 /* ============================================================
@@ -1077,31 +1112,89 @@ a {
 .contact-list {
     list-style: none;
     margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .contact-list li {
-    padding: 14px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, .12);
+    border-bottom: 1px solid rgba(255, 255, 255, .10);
+}
+
+.contact-list li:last-child {
+    border-bottom: none;
+}
+
+/* Full-row clickable link */
+.contact-list-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    color: var(--white);
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.contact-list-item:hover {
+    color: var(--cyan-light);
+    transform: translateX(4px);
+}
+
+/* Circular icon badge */
+.contact-icon-wrap {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.contact-list-item:hover .contact-icon-wrap {
+    background: rgba(0, 180, 216, 0.3);
+    border-color: rgba(0, 180, 216, 0.5);
+}
+
+.contact-icon-wrap svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2;
+    color: var(--white);
+}
+
+.contact-icon-wrap img {
+    display: block;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+/* Text block: label on top, value below */
+.contact-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.4;
 }
 
 .contact-label {
-    display: block;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: .1em;
+    letter-spacing: .12em;
     color: rgba(255, 255, 255, .5);
-    margin-bottom: 4px;
+    line-height: 1;
 }
 
-.contact-list a {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--white);
-    transition: var(--transition);
-}
-
-.contact-list a:hover {
+.contact-list-item:hover .contact-text {
     color: var(--cyan-light);
 }
 
@@ -1150,23 +1243,67 @@ a {
 }
 
 .marketplace-link {
-    background: rgba(255, 255, 255, 0.18);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(10px);
     color: var(--white);
-    padding: 11px 22px;
+    padding: 10px 20px;
     border-radius: var(--radius-full);
     font-size: 14px;
     font-weight: 600;
-    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
     transition: var(--transition);
+    text-decoration: none;
 }
 
 .marketplace-link:hover {
-    background: rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.22);
     border-color: rgba(255, 255, 255, 0.4);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    color: var(--white);
 }
+
+/* Icon circle inside marketplace button */
+.mkt-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.marketplace-link:hover .mkt-icon {
+    background: rgba(0, 180, 216, 0.35);
+}
+
+.mkt-icon img {
+    width: 16px;
+    height: 16px;
+    display: block;
+    object-fit: contain;
+}
+
+/* Tokopedia logo (dibesarkan khusus di section Hubungi Kami) */
+.tokopedia-logo {
+    width: 120px;
+    height: 120px;
+}
+
+@media (max-width: 768px) {
+    .tokopedia-logo {
+        width: 80px;
+        height: 80px;
+    }
+}
+
 
 
 /* ============================================================
@@ -1248,7 +1385,7 @@ a {
 }
 
 .footer-badge svg,
-.footer-badge i {
+.footer-adge i {
     width: 14px;
     height: 14px;
     stroke-width: 2.5;
@@ -1680,7 +1817,8 @@ a {
         border-radius: var(--radius-xl);
         border: 1px solid rgba(255, 255, 255, 0.6);
         box-shadow: 0 8px 28px rgba(5, 99, 193, 0.1);
-        overflow: hidden;
+        overflow: visible;
+        perspective: 800px;
     }
 
     .mobile-hero-image img {
@@ -1690,6 +1828,27 @@ a {
         object-fit: contain;
         filter: drop-shadow(0 16px 32px rgba(5, 99, 193, .15));
         border-radius: var(--radius-lg);
+        animation: floatGentleMobile 4s ease-in-out infinite;
+        transform-style: preserve-3d;
+        will-change: transform, filter;
+    }
+
+    .mobile-hero-image img.paused-float {
+        animation-play-state: paused !important;
+    }
+
+    @keyframes floatGentleMobile {
+
+        0%,
+        100% {
+            transform: scale(1) translateY(0);
+            filter: drop-shadow(0 16px 32px rgba(5, 99, 193, .15));
+        }
+
+        50% {
+            transform: scale(1) translateY(-10px);
+            filter: drop-shadow(0 22px 42px rgba(5, 99, 193, .25));
+        }
     }
 
     .mobile-hero-image img.mobile-exit {
@@ -1722,6 +1881,16 @@ a {
 
     .contact-info .size-badges {
         justify-content: center;
+    }
+
+    .contact-list {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 28px auto 0;
+        text-align: left;
+        max-width: 320px;
+        width: 100%;
     }
 
     .footer-content {
@@ -1855,6 +2024,178 @@ a {
     .gen-product {
         max-height: 360px;
     }
+
+    .section-title {
+        font-size: clamp(24px, 5.5vw, 32px);
+        line-height: 1.35;
+    }
+
+    .title-line {
+        line-height: 1.15;
+    }
+}
+
+/* ============================================================
+   TESTIMONIAL CAROUSEL
+   ============================================================ */
+.testimonials {
+    padding: 100px 0 80px;
+    background: var(--cyan-pale);
+    overflow: hidden;
+}
+
+.testi-section-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 56px;
+    padding: 0 24px;
+}
+
+/* The outer mask that hides overflow and shows fade edges */
+.testi-carousel-wrapper {
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+    /* Fade edges */
+}
+
+.testi-carousel-wrapper::before,
+.testi-carousel-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.testi-carousel-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, var(--cyan-pale), transparent);
+}
+
+.testi-carousel-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, var(--cyan-pale), transparent);
+}
+
+.testi-carousel-wrapper:active {
+    cursor: grabbing;
+}
+
+/* The scrolling track */
+.testi-track {
+    display: flex;
+    gap: 24px;
+    padding: 16px 40px 24px;
+    /* The auto-scroll animation (right to left = negative translateX) */
+    animation: testiScroll 32s linear infinite;
+    width: max-content;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.testi-track.paused {
+    animation-play-state: paused;
+}
+
+@keyframes testiScroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Individual card */
+.testi-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    width: 320px;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(5, 99, 193, 0.08);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.testi-card::before {
+    content: '\201C';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-size: 96px;
+    font-family: Georgia, serif;
+    color: var(--cyan);
+    opacity: 0.12;
+    line-height: 1;
+    pointer-events: none;
+}
+
+.testi-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(0, 180, 216, 0.3);
+}
+
+.testi-stars {
+    display: flex;
+    gap: 4px;
+    color: #F59E0B;
+    margin-bottom: 16px;
+}
+
+.testi-stars svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    stroke: none;
+}
+
+.testi-quote {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 24px;
+    font-style: italic;
+}
+
+.testi-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.testi-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 800;
+    font-size: 18px;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.testi-author h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    margin: 0 0 2px;
+}
+
+.testi-author span {
+    font-size: 12px;
+    color: var(--mid);
+    font-weight: 500;
 }
 
 @media (max-width: 480px) {
@@ -1900,4 +2241,34 @@ a {
     .info-desc {
         font-size: 11px;
     }
+
+    .testi-card {
+        padding: 24px;
+        width: 280px;
+    }
+}
+
+/* ---- Interactive Mobile Touch Tap Feedback (:active states) ---- */
+.challenge-card:active,
+.wound-card:active,
+.spec-card:active,
+.testi-card:active {
+    transform: translateY(-2px) scale(0.97) !important;
+    box-shadow: var(--shadow-sm) !important;
+    filter: brightness(0.97);
+    transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease !important;
+}
+
+.btn-primary:active,
+.btn-ghost:active,
+.nav-cta:active,
+.marketplace-link:active {
+    transform: scale(0.95) !important;
+    box-shadow: none !important;
+    transition: transform 0.08s ease !important;
+}
+
+.hamburger:active {
+    transform: scale(0.85);
+    transition: transform 0.1s ease !important;
 }
