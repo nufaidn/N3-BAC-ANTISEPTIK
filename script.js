@@ -303,15 +303,14 @@ window.addEventListener('load', () => {
 });
 
 /* ============================================================
-   TESTIMONIAL CAROUSEL — Infinite auto-scroll + drag support
+   TESTIMONIAL CAROUSEL — Infinite auto-scroll with pause on hover/touch
    ============================================================ */
 (function () {
     const wrapper = document.getElementById('testiCarouselWrapper');
     const track = document.getElementById('testiTrack');
     if (!wrapper || !track) return;
 
-    /* 1. Duplicate cards to create seamless infinite loop
-          The CSS animation runs -50%, so we need 2× the original set */
+    /* 1. Duplicate cards to create seamless infinite loop */
     const originalCards = Array.from(track.children);
     originalCards.forEach(card => {
         const clone = card.cloneNode(true);
@@ -322,116 +321,23 @@ window.addEventListener('load', () => {
     /* Re-create lucide icons in clones */
     lucide.createIcons();
 
-    /* 2. Pause/resume helpers */
-    let isPaused = false;
-    let isDragging = false;
-    let dragStartX = 0;
-    let dragCurrentOffset = 0; /* manual drag offset in px */
-    let animationOffset = 0;   /* where the animation was when drag started */
+    /* 2. Pause and resume animation play state */
+    const pause = () => {
+        track.style.animationPlayState = 'paused';
+    };
 
-    function pause() {
-        if (!isDragging) {
-            isPaused = true;
-            track.classList.add('paused');
-        }
-    }
+    const resume = () => {
+        track.style.animationPlayState = 'running';
+    };
 
-    function resume() {
-        if (!isDragging) {
-            isPaused = false;
-            track.classList.remove('paused');
-        }
-    }
-
-    /* 3. Pause on hover (desktop) */
+    // Desktop hover pause
     wrapper.addEventListener('mouseenter', pause);
     wrapper.addEventListener('mouseleave', resume);
 
-    /* 4. Pause on touch start, resume on touch end (if no drag) */
-    wrapper.addEventListener('touchstart', (e) => {
-        pause();
-        dragStartX = e.touches[0].clientX;
-        isDragging = true;
-        /* snapshot current transform so we can offset from it */
-        const style = window.getComputedStyle(track);
-        const matrix = new DOMMatrix(style.transform);
-        animationOffset = matrix.m41; /* translateX value */
-        dragCurrentOffset = 0;
-        track.style.transition = 'none';
-    }, { passive: true });
-
-    wrapper.addEventListener('touchmove', (e) => {
-        if (!isDragging) return;
-        const delta = e.touches[0].clientX - dragStartX;
-        dragCurrentOffset = delta;
-        const newX = animationOffset + delta;
-        track.style.transform = `translateX(${newX}px)`;
-    }, { passive: true });
-
-    wrapper.addEventListener('touchend', () => {
-        isDragging = false;
-        track.style.transition = '';
-        track.style.transform = '';
-        /* Sync animation progress: calculate what % of total width we are at */
-        syncAnimationFromOffset(animationOffset + dragCurrentOffset);
-        resume();
-    }, { passive: true });
-
-    /* 5. Mouse drag (desktop) */
-    wrapper.addEventListener('mousedown', (e) => {
-        isPaused = true;
-        isDragging = true;
-        dragStartX = e.clientX;
-        const style = window.getComputedStyle(track);
-        const matrix = new DOMMatrix(style.transform);
-        animationOffset = matrix.m41;
-        dragCurrentOffset = 0;
-        track.classList.add('paused');
-        track.style.transition = 'none';
-        e.preventDefault();
-    });
-
-    document.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        const delta = e.clientX - dragStartX;
-        dragCurrentOffset = delta;
-        const newX = animationOffset + delta;
-        track.style.transform = `translateX(${newX}px)`;
-    });
-
-    document.addEventListener('mouseup', () => {
-        if (!isDragging) return;
-        isDragging = false;
-        track.style.transition = '';
-        track.style.transform = '';
-        syncAnimationFromOffset(animationOffset + dragCurrentOffset);
-        isPaused = false;
-        track.classList.remove('paused');
-    });
-
-    /* 6. Sync animation keyframe progress from a pixel offset */
-    function syncAnimationFromOffset(currentPx) {
-        /* Total scrollable width = half the track (the original set) */
-        const totalWidth = track.scrollWidth / 2;
-        /* Normalise to a 0-100 range, wrapping */
-        let percent = (Math.abs(currentPx) / totalWidth) * 100;
-        percent = ((percent % 100) + 100) % 100; /* keep positive */
-
-        /* Inject a temporary override @keyframes + restart */
-        const uid = 'tsi' + Date.now();
-        const style = document.createElement('style');
-        /* Start the animation from `percent`% progress so the position matches */
-        style.textContent = `
-            @keyframes ${uid} {
-                0%   { transform: translateX(-${percent / 100 * totalWidth}px); }
-                100% { transform: translateX(-${totalWidth + (percent / 100 * totalWidth)}px); }
-            }
-            #testiTrack { animation-name: ${uid}; }
-        `;
-        document.head.appendChild(style);
-        /* Clean up after a tick — the animation is already running */
-        setTimeout(() => style.remove(), 100);
-    }
+    // Mobile touch pause
+    wrapper.addEventListener('touchstart', pause, { passive: true });
+    wrapper.addEventListener('touchend', resume, { passive: true });
+    wrapper.addEventListener('touchcancel', resume, { passive: true });
 })();
 
 /* ---- Mobile Hero Image 3D Touch-Tilt ---- */
